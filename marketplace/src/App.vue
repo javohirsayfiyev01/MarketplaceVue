@@ -23,7 +23,7 @@
                 <div class="dropdown-content">
                     <a href="#">Ayollar uchun</a>
                     <a href="#">Erkaklar uchun</a>
-                    <a href="#">Uniseks</a>
+                    <!-- <a href="#">Uniseks</a> -->
                 </div>
             </li>
             <li><a href="#">

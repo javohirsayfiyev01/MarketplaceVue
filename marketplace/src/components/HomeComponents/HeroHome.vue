@@ -6,7 +6,7 @@
         G'alabaning xushbo'y hidlari bilan ruhingizni ko'taring!
       </h1>
       <p class="hero__description">
-        Hozir xarid qiling va Local Face bilan g'alabaning yoqimli hidini qabul qiling.
+        Hozir xarid qiling va prom.uz bilan g'alabaning yoqimli hidini qabul qiling.
       </p>
       <a href="/shop">
         <button  class="button">Hozir xarid qiling</button>

@@ -4,18 +4,18 @@
       <div class="products-shop-catalog">
         <div class="products-shop-catalog__content">
 
-          <li @click="addProItem" class="products-shop-catalog-card">
+          <li  class="products-shop-catalog-card">
             <div class="products-shop-catalog-card__img">
               <a href="#"><img src="@/img/product/Atir/Element 8_1.jpg" alt="404" width="100%" height="100%"></a>
             </div>
             <div class="products-shop-catalog-card__info">
-                <h2 class="products-shop-catalog-card__title">{{ $store.state.title }}</h2>
+                <h2 class="products-shop-catalog-card__title">{{ state.producttitle }}</h2>
               <div class="products-shop-catalog-card__wrapper">
                 <div class="products-shop-catalog-card__price-info">
-                  <p class="products-shop-catalog-card__price">{{ $store.state.price }}</p>
-                  <span class="products-shop-catalog-card__ml">{{ $store.state.ml }}</span>
+                  <p class="products-shop-catalog-card__price">{{ product.narxi }}</p>
+                  <span class="products-shop-catalog-card__ml">{{ product.olcham}}</span>
                 </div>
-                <button class="products-shop-catalog-card__btn button">
+                <button class="products-shop-catalog-card__btn button" @click="loadProduct">
                   Add to Bag
                 </button>
               </div>
@@ -28,14 +28,12 @@
   </section>
 </template>
 <script>
-// import AddProduct from './AddProduct.vue';
+
 
 export default {
-  props:{
-    product:{
-      type: Object,
-      requared: true
-    }
+  name: 'ProductsShop',
+  computed:{
+
   },
   methods: {
     openModal(){
@@ -46,7 +44,9 @@ export default {
     },
     addProItem(){
       this.$AddProduct.push('ProductItem')
-    }
+    },
+
+
   },
 
 }

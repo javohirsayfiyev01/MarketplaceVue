@@ -1,127 +1,131 @@
 <template>
   <div>
-  <section class="signup" v-if="openButton">
-    <div class="signup__container container">
-      <div class="signup-box">
+    <section class="signup" v-if="openButton">
+      <div class="signup__container container">
+        <div class="signup-box">
           <h1 class="signup-box__title">Ro'yxatdan o'tish</h1>
-      </div>
+        </div>
 
-      <form class="input-group__signup">
-        <input class="input-group__input" type="text" v-model="name" id="name" required placeholder="Ism">
-        <input class="input-group__input" type="text" v-model="number" id="number" name="number" required placeholder="Number">
+        <form class="input-group__signup" @submit.prevent="clickButton">
+          <input class="input-group__input" type="text" v-model="name" id="name" required placeholder="Ism">
+          <input class="input-group__input" type="text" v-model="number" id="number" name="number" required placeholder="Number">
 
-
-        <div class="signup-btn__box">
-          <button class="input-group__input-btn button"  @click.prevent="clickButton" @click="copyButton" type="submit">Tasdiqlash</button>
+          <div class="signup-btn__box">
+            <button class="input-group__input-btn button" type="submit">Tasdiqlash</button>
+          </div>
+        </form>
       </div>
-      </form>
-      </div>
-  </section>
+    </section>
 
           <!-- Add - Product -->
-  <section class="add-product" v-if="closeButton">
-    <div class="add-product__container container">
-      <h1 class="add-product__title">Mahsulot qo'shish</h1>
-    <form @submit.prevent="addProduct">
-      <div class="add-product__info">
-          <div class="input-group">
-            <label for="title">Sarlavha qo'shing</label>
-            <input class="input-group__input" :value="producttitle" @input="producttitle = $event.target.value" id="title" name="title" type="text" required placeholder="For example, Giorgio Armani">
-          </div>
-             <select class="filter-shop__item" :value="bolim" @input="bolim = $event.target.value">
+    <section class="add-product" v-if="closeButton">
+      <div class="add-product__container container">
+        <h1 class="add-product__title">Mahsulot qo'shish</h1>
+
+        <form @submit.prevent="addProduct">
+          <div class="add-product__info">
+            <div class="input-group">
+              <label for="title">Sarlavha qo'shing</label>
+              <input class="input-group__input" v-model="producttitle" id="title" name="title"  type="text" required placeholder="For example, Giorgio Armani">
+            </div>
+            <select class="filter-shop__item" v-model="bolim">
               <option value="">Bo'lim</option>
               <option value="ayollar atiri">Ayollar atiri</option>
               <option value="erkaklar atiri">Erkaklar atiri</option>
               <option value="hamma uchun">Uniseks</option>
-             </select>
+            </select>
 
-             <select class="filter-shop__item" :value="davlat" @input="davlat = $event.target.value">
+            <select class="filter-shop__item" v-model="davlat">
               <option value="">Davlat</option>
               <option value="usa">USA</option>
               <option value="turkiya">Turkiya</option>
               <option value="xitoy">Xitoy</option>
               <option value="yevropa">Yevropa</option>
-             </select>
-      </div>
-
-      <div class="add-product-img">
-        <h3 class="add-product-img__title">Rasmlar</h3>
-        <p class="add-product-img__description">
-          Birinchi fotosurat reklamangizning asosiy tasviri bo'ladi. Fotosuratlarni bosish va sudrab borish orqali ularning tartibini o'zgartirishingiz mumkin !
-        </p>
-        <div class="add-product-img__list">
-          <label for="" class="add-product-img__item">
-            <img src="@/img/icon/camera-solid.svg" alt="404" width="25" height="25">
-            <input type="file">
-          </label>
-          <label for="" class="add-product-img__item">
-            <img src="@/img/icon/camera-solid.svg" alt="404" width="25" height="25">
-            <input type="file">
-          </label>
-          <label for="" class="add-product-img__item">
-            <img src="@/img/icon/camera-solid.svg" alt="404" width="25" height="25">
-            <input type="file">
-          </label>
-        </div>
-      </div>
-
-      <div class="add-product-description">
-        <div class="add-product-description__box">
-          <label class="add-product-description__title" for="desc">Malumot</label>
-          <textarea class="add-product-description__text" name="desc" :value="description" @input="description = $event.target.value" id="desc" cols="30" rows="10" placeholder="Mahsulot haqida batafsil ma'lumotni kiriting!"></textarea>
-        <p>EKamida 40 ta so'z kiriting !</p>
-        </div>
-      </div>
-
-      <div class="location">
-        <div class="location__box">
-          <label for="city">Manzil</label>
-          <input type="text" :value="location" id="city" name="city" placeholder="New York" required>
-          <div>
-          <label for="city">Narxi</label>
-          <input type="number" :value="narxi" id="narxi" name="narxi" placeholder="Narxi" required>
+            </select>
           </div>
-          <div>
-          <label for="city">O'lchami</label>
-          <input type="text" :value="olcham" id="o'lcham" name="o'lcham" placeholder="O'lchami" required>
-          </div>
-        </div>
-      </div>
 
-      <div class="contact-information">
-        <h1 class="contact-information__title">Bog'lanish uchun ma'lumot</h1>
-        <form class="contact-information__box">
-          <div>
-            <label for="name">Ism</label>
-            <input type="text" id="namee" name="namee" :value="namee" @input="namee = $event.target.value" required placeholder="Jon">
+          <div class="add-product-img">
+            <h3 class="add-product-img__title">Rasmlar</h3>
+            <p class="add-product-img__description">
+              Birinchi fotosurat reklamangizning asosiy tasviri bo'ladi. Fotosuratlarni bosish va sudrab borish orqali ularning tartibini o'zgartirishingiz mumkin!
+            </p>
+            <div class="add-product-img__list">
+              <label  class="add-product-img__item">
+                <img src="@/img/icon/camera-solid.svg" alt="404" width="25" height="25">
+                <input type="file" @change="previewImage($event, 0)">
+              </label>
+              <label  class="add-product-img__item">
+                <img src="@/img/icon/camera-solid.svg" alt="404" width="25" height="25">
+                <input type="file" @change="previewImage($event, 1)">
+              </label>
+              <label class="add-product-img__item">
+                <img src="@/img/icon/camera-solid.svg" alt="404" width="25" height="25">
+                <input type="file" @change="previewImage($event, 2)">
+              </label>
+            </div>
           </div>
-          <div>
-          <label for="email">Email</label>
-          <input type="text" id="emaill" name="emaill" :value="emaill" @input="emaill = $event.target.value" required placeholder="">
+
+          <div class="add-product-description">
+            <div class="add-product-description__box">
+              <label class="add-product-description__title" for="desc">Malumot</label>
+              <textarea class="add-product-description__text" v-model="description" id="desc" cols="30" rows="10" placeholder="Mahsulot haqida batafsil ma'lumotni kiriting!"></textarea>
+              <p>Kamida 40 ta so'z kiriting!</p>
+            </div>
           </div>
-          <div>
-          <label for="number">Telefon raqam</label>
-          <input type="text" id="numberr" name="numberr" :value="numberr"  @input="numberr = $event.target.value" required placeholder="777 77 77">
+
+          <div class="location">
+            <div class="location__box">
+              <label for="city">Manzil</label>
+              <input type="text" v-model="location" id="city" name="city" placeholder="New York" required>
+              <div>
+                <label for="narxi">Narxi</label>
+                <input type="number" v-model="narxi" id="narxi" name="narxi" placeholder="Narxi" required>
+              </div>
+              <div>
+                <label for="olcham">O'lchami</label>
+                <input type="text" v-model="olcham" id="olcham" name="olcham" placeholder="O'lchami" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-information">
+            <h1 class="contact-information__title">Bog'lanish uchun ma'lumot</h1>
+            <div class="contact-information__box">
+              <div>
+                <label for="namee">Ism</label>
+                <input type="text" v-model="namee" id="namee" name="namee" required placeholder="Jon">
+              </div>
+              <div>
+                <label for="emaill">Email</label>
+                <input type="text" v-model="emaill" id="emaill" name="emaill" required placeholder="">
+              </div>
+              <div>
+                <label for="numberr">Telefon raqam</label>
+                <input type="text" v-model="numberr" id="numberr" name="numberr" required placeholder="777 77 77">
+              </div>
+            </div>
+          </div>
+
+          <div class="add-product-buttons">
+            <div class="add-product-buttons__box">
+              <button class="add-product-buttons__btn button" type="submit">Joylashtirish</button>
+            </div>
           </div>
         </form>
       </div>
-      <div class="add-product-buttons">
-        <div class="add-product-buttons__box">
-          <button class="add-product-buttons__btn button" type="submit">Joylashtirish</button>
-        </div>
-      </div>
-    </form>
-    </div>
-  </section>
+    </section>
 
 <SiteFooter/>
   </div>
 </template>
 <script>
 import SiteFooter from "@/components/SiteFooter.vue";
+
 export default {
+  name: 'SignUpView',
 data() {
   return {
+
       name: '',
       number: '',
       producttitle: '',
@@ -134,6 +138,7 @@ data() {
       namee: '',
       emaill: '',
       numberr: '',
+      images: ['', '', ''],
       closeButton: false,
       openButton: true,
     }
@@ -150,26 +155,50 @@ methods: {
       this.$router.push({ name: "shop" });
     }
  },
+ previewImage(event, index) {
+      const input = event.target;
+      const file = input.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.images.splice(index, 1, e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    },
 
  addProduct() {
-  const newProduct = {
-      producttitle: this.producttitle,
-      bolim: this.bolim,
-      davlat: this.davlat,
-      description: this.description,
-      location:  this.location,
-      narxi: this.narxi,
-      olcham: this.olcham,
-      namee: this.namee,
-      emaill: this.emaill,
-      numberr: this.numberr,
-  }
+      const newProduct = {
+        producttitle: this.producttitle,
+        bolim: this.bolim,
+        davlat: this.davlat,
+        description: this.description,
+        location: this.location,
+        narxi: this.narxi,
+        olcham: this.olcham,
+        namee: this.namee,
+        emaill: this.emaill,
+        numberr: this.numberr,
+        images: this.images,
+      };
 
-  this.$emit('createProduct', newProduct);
-  this.producttitle = ''
+       localStorage.setItem('newProduct', JSON.stringify(newProduct)),
 
- },
 
+
+      this.producttitle = '';
+      this.bolim = '';
+      this.davlat = '';
+      this.description = '';
+      this.location = '';
+      this.narxi = '';
+      this.olcham = '';
+      this.namee = '';
+      this.emaill = '';
+      this.numberr = '';
+      this.images = ['', '', ''];
+    },
 
 },
   components:{

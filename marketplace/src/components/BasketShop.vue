@@ -169,6 +169,9 @@ export default {
   gap: 30px;
   width: calc(100% - 380px);
 }
+.cart-section__list li{
+  list-style: none;
+}
 .cart-section__item-img{
   width: 100px;
   height: 100px;

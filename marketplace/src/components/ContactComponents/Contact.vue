@@ -22,6 +22,7 @@ export default {
 <style scoped>
 .singup{
   margin-top: 100px;
+  padding-bottom: 85px;
 }
 .singup__container{
   display: flex;
