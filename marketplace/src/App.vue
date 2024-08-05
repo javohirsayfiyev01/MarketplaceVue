@@ -62,11 +62,6 @@ export default {
       this.$router.push({ name: "home" });
     },
   },
-
-  components:{
-
-
-  }
 }
 </script>
 

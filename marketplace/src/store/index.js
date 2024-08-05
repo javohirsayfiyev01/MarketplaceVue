@@ -2,27 +2,25 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    product: {
-      title: ' ',
-      bolim: '',
-      davlat: '',
-      img: '',
-      malumot: '',
-      joylashuv: '',
-      price: '',
-      ml: '',
-      btn: '',
-    }
+    products: JSON.parse(localStorage.getItem('products')) || []
+
 
   },
 
   mutations: {
-
+    add_Obj(state, product){
+      state.products.push(product),
+      localStorage.setItem('products', JSON.stringify(state.products))
+    }
   },
-  actions: {
 
+  actions: {
+    addProduct({commit}, product){
+      commit('add_Obj', product)
+    }
   },
   getters: {
+    getProducts: state => state.products
   },
 
   modules: {

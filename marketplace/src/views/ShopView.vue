@@ -1,13 +1,15 @@
 <template >
-  <ul>
+  <div>
 
     <!-- <OfferShop/>  -->
     <HeroShop/>
     <FilterShop/>
-    <!-- <ProductsShop v-for="product in products" :key="product" :product="product"/> -->
-    <ProductsShop/>
+    <ul class="productsshop container">
+      <ProductsShop v-for="product in products" :key="product.id" :product="product"/>
+    </ul>
+
     <SiteFooter/>
-  </ul>
+  </div>
 
 </template>
 <script>
@@ -21,35 +23,14 @@ data() {
   return {
     data() {
       return {
-        // products:[
-        //   {
-        //     title: 'Golden Luminary',
-        //     bolim: 'Erkak',
-        //     davlat: 'Usa',
-        //     img: '',
-        //     malumot: '',
-        //     joylashuv: 'Bukhara',
-        //     price: '$ 220.00',
-        //     ml: '100ml',
-        //     btn: 'Add to Bag',
-        //   },
-        //   {
-        //     title: 'Gucci',
-        //     bolim: 'Erkak',
-        //     davlat: 'Turkiy',
-        //     img: '',
-        //     malumot: '',
-        //     joylashuv: 'Bukhara',
-        //     price: '$ 100.00',
-        //     ml: '150ml',
-        //     btn: 'Add to Bag',
-        //   },
-        // ]
+
+
       }
     },
   }
 },
 methods: {
+
 
 },
 components:{
@@ -58,9 +39,25 @@ components:{
   FilterShop,
   ProductsShop,
   SiteFooter,
-}
+},
+computed:{
+    products(){
+      return this.$store.getters.getProducts
+    }
+  }
 }
 </script>
 <style>
+.productsshop{
+  display: grid;
+  margin: 0 auto 0 auto;
+  padding: 0;
+  grid-row-gap: 32px;
+  grid-column-gap: 30px;
+  grid-template-columns: repeat(4, 0fr);
+  margin-top: 30px;
+}
 
+
+  
 </style>

@@ -17,10 +17,7 @@
         <img src="../img/product/Old_fashion_balck_and_gold_color_perfume-removebg-preview 1.png"  alt="404" width="88px" height="150px">
       </div>
       <div class="product-item__description-price">
-        <p>$ 2.000</p>
-      </div>
-      <div class="product-item__description-btn">
-        <button class="button" type="button">Add to Bag</button>
+        <p>{{}}$</p>
       </div>
 
     </div>

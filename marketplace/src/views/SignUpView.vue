@@ -125,7 +125,7 @@ export default {
   name: 'SignUpView',
 data() {
   return {
-
+      id: '',
       name: '',
       number: '',
       producttitle: '',
@@ -143,7 +143,6 @@ data() {
       openButton: true,
     }
 },
-
 methods: {
   clickButton(){
     if (this.name == "admin" && this.number == "admin") {
@@ -183,8 +182,7 @@ methods: {
         images: this.images,
       };
 
-       localStorage.setItem('newProduct', JSON.stringify(newProduct)),
-
+    this.$store.dispatch('addProduct', newProduct)
 
 
       this.producttitle = '';
@@ -198,9 +196,15 @@ methods: {
       this.emaill = '';
       this.numberr = '';
       this.images = ['', '', ''];
+
+
     },
+},
+computed:{
 
 },
+
+
   components:{
     SiteFooter,
   }

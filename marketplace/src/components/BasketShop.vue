@@ -89,7 +89,7 @@
                 </div>
               </div>
               <div class="cart-form__bottom">
-                <button class="button" type="button">Hoziroq hariq qiling</button>
+                <button class="button" type="button" @click="bos">Hoziroq hariq qiling</button>
               </div>
 
             </div>
@@ -103,6 +103,13 @@
 
 <script>
 export default {
+  methods: {
+    bos(){
+      const newProductString = localStorage.getItem('newProduct');
+   const newProduct = JSON.parse(newProductString);
+   console.log(newProduct.producttitle);
+    }
+  },
 
 }
 </script>
