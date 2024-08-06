@@ -1,15 +1,14 @@
 <template>
-  <div>
   <section class="products-shop">
     <div class="products-shop__container container">
       <div class="products-shop-catalog">
         <div class="products-shop-catalog__content">
           <li  class="products-shop-catalog-card">
-            <div class="products-shop-catalog-card__img" @mouseover="isHeddin">
+            <RouterLink :to="`/itemsproductView?id=${product.id}`" class="products-shop-catalog-card__img">
               <a href="#">
                 <img :src="product.images[0]" alt="404" width="100%" height="100%">
               </a>
-            </div>
+            </RouterLink>
             <div class="products-shop-catalog-card__info">
                 <h2 class="products-shop-catalog-card__title">{{ product.producttitle }}</h2>
               <div class="products-shop-catalog-card__wrapper">
@@ -18,7 +17,7 @@
                   <span class="products-shop-catalog-card__ml">{{ product.olcham }}ml</span>
                 </div>
                 <button class="products-shop-catalog-card__btn button">
-                  Add to Bag
+              Savatga qo'shish
                 </button>
               </div>
             </div>
@@ -27,31 +26,6 @@
       </div>
     </div>
 </section>
-
-<section class="product-item"
-:class="{ active: isActive }">
-  <div class="product-item__container container">
-    <div class="product-item__img-box">
-      <img :src="product.images[0]" alt="404" class="product-item__img" width="100%" height="auto">
-    </div>
-    <div class="product-item__description">
-      <div class="product-item__description-title">
-        <h3>{{product.producttitle}}</h3>
-      </div>
-      <div class="product-item__description-info">
-        <p>{{product.description}}</p>
-      </div>
-      <div class="product-item__description-imgs">
-        <img :src="product.images[1]"  alt="404" width="88px" height="150px">
-        <img :src="product.images[2]"  alt="404" width="88px" height="150px">
-      </div>
-      <div class="product-item__description-price">
-        <p>{{product.narxi }}$</p>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
 </template>
 <script>
 
@@ -67,41 +41,24 @@ export default {
   },
   data() {
     return {
-      isActive: false
     }
   },
 
   methods: {
-    isHeddin(){
-      this.isActive = !this.isActive
-console.log('salom');
+
 
     }
 
-    // openModal(){
-    //   this.openModal('ModalShop')
-    // },
-    // AddProductItem(){
-    //   this.push()
-    // },
-    // addProItem(){
-    //   this.$AddProduct.push('ProductItem')
-    // },
-  },
 
 }
 </script>
 <style scoped>
-        .activ {
-          display: block;
-        }
-
             /* ProductsShop */
 .products-shop-catalog-card{
   width: 260px;
-  height: 450px;
   margin: 0;
   padding: 0;
+  padding-bottom: 8px;
   background: linear-gradient(to right, rgb(170, 170, 170), #a3a3a3);
 }
 .products-shop-catalog-card__img{
@@ -155,45 +112,4 @@ console.log('salom');
   font-size: 15px;
 }
 
-
-          /* ProductItem */
-.product-item{
-  margin-top: 90px;
-  background-color: #a3a3a3;
-}
-
-.product-item__container{
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  color: white;
-}
-.product-item__description{
-  width: 500px;
-  height: 500px;
-}
-.product-item__description-title{
-font-weight: 500;
-font-size: 40px;
-line-height: 50px;
-margin-bottom: 45px;
-}
-.product-item__description-info{
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
-  margin-bottom: 45px;
-}
-.product-item__description-imgs{
-  width: 230px;
-  height: auto;
-  cursor: pointer;
-}
-  /*
-.product-item__description-price{
-  font-weight: 700;
-  font-size: 24px;
-  margin-bottom: 45px;
-  color: #AB572D;
-} */
 </style>

@@ -1,20 +1,27 @@
 <template>
   <div>
-<ProductItem/>
+    <ProductItem :product="product"/>
   </div>
 </template>
+
 <script>
 import ProductItem from '@/components/ProductItem.vue';
+
 export default {
-  components:{
+  components: {
     ProductItem
   },
-  products(){
-      return this.$store.getters.getProducts
-  }
-
-}
+  computed: {
+    product() {
+      let products = this.$store.getters.getProducts
+      let id = this.$route.query.id
+      let product = products.find(product => product.id === id);
+      return product;
+    },
+  },
+};
 </script>
+
 <style>
 
 </style>

@@ -120,12 +120,12 @@
 </template>
 <script>
 import SiteFooter from "@/components/SiteFooter.vue";
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: 'SignUpView',
 data() {
   return {
-      id: '',
       name: '',
       number: '',
       producttitle: '',
@@ -180,8 +180,8 @@ methods: {
         emaill: this.emaill,
         numberr: this.numberr,
         images: this.images,
+        id: generateUUID(),
       };
-
     this.$store.dispatch('addProduct', newProduct)
 
 
@@ -209,6 +209,10 @@ computed:{
     SiteFooter,
   }
 }
+
+function generateUUID() {
+  return uuidv4();
+  }
 </script>
 <style scoped>
 .javohdev{
