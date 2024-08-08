@@ -12,13 +12,13 @@
                 <li>
                   <div class="cart-section__item">
                     <div class="cart-section__item-img">
-                      <img src="../img/product/Atir/Element 8.jpg" width="100px" height="100px" alt="">
+                      <img :src="product.images[0]" width="100px" height="100px" alt="404">
                     </div>
                     <div class="cart-section__item-content">
                       <div class="cart-section__item-info">
-                        <h4 class="cart-section__item-name">Golden Luminary</h4>
+                        <h4 class="cart-section__item-name">{{ product.producttitle }}</h4>
                         <div class="cart-section__item-vendor">
-                          <span>100ml</span>
+                          <span>{{ product.olcham }}</span>
                         </div>
                       </div>
 
@@ -37,7 +37,7 @@
 
                       <div class="cart-section__item-price">
                         <div class="price">
-                          <span class="price__main">$ 220.00</span>
+                          <span class="price__main">{{ product.narxi }}</span>
                         </div>
                       </div>
                     </div>
@@ -105,11 +105,15 @@
 export default {
   methods: {
     bos(){
-      const newProductString = localStorage.getItem('newProduct');
-   const newProduct = JSON.parse(newProductString);
-   console.log(newProduct.producttitle);
+
     }
   },
+  props:{
+    product:{
+      type: Object,
+      requared: true
+    }
+  }
 
 }
 </script>

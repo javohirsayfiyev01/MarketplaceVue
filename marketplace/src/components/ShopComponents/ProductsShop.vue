@@ -16,9 +16,11 @@
                   <p class="products-shop-catalog-card__price">{{ product.narxi }}$</p>
                   <span class="products-shop-catalog-card__ml">{{ product.olcham }}ml</span>
                 </div>
-                <button class="products-shop-catalog-card__btn button">
-              Savatga qo'shish
+                <button class="products-shop-catalog-card__btn button"
+                 @click="addProducts">
+                  Savatga qo'shish
                 </button>
+
               </div>
             </div>
           </li>
@@ -45,8 +47,11 @@ export default {
   },
 
   methods: {
+    addProducts(){
+    let ape =  this.$router.push({ name: "basket?id=${product.id}" });
+    this.$store.dispatch('addProducts',ape)
 
-
+    }
     }
 
 
