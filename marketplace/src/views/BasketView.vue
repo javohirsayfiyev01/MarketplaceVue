@@ -1,11 +1,10 @@
 <template>
   <div>
-<BasketShop v-for="product in korProducts" :key="product.id"
-            :product="product"  />
+<BasketShop :product="korProducts" />
   </div>
 </template>
 <script>
-import BasketShop from "../components/BasketShop.vue";
+import BasketShop from "../components/BasketComponents/BasketShop.vue";
 export default {
   components:{
     BasketShop,
@@ -20,4 +19,4 @@ export default {
 </script>
 <style scoped>
 
-</style>
+</style>+3

@@ -13,10 +13,11 @@ export default createStore({
       state.products.push(product),
       localStorage.setItem('products', JSON.stringify(state.products))
     },
-    ape_Obj(state, ape){
-      state.korzinka.push(ape),
-      localStorage.setItem('korzinka', JSON.stringify(state.korzinka))
 
+    id_Obj(state, id){
+      let allProducts = state.products
+      state.korzinka.push(allProducts.find(product => product.id === id)),
+      localStorage.setItem('korzinka', JSON.stringify(state.korzinka))
     }
   },
 
@@ -24,8 +25,8 @@ export default createStore({
     addProduct({commit}, product){
       commit('add_Obj', product)
     },
-    addProducts({commit}, ape){
-      commit('ape_Obj', ape)
+    addProducts({commit}, id){
+      commit('id_Obj', id)
     }
   },
   getters: {

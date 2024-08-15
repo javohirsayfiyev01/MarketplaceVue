@@ -27,7 +27,7 @@
               <option value="glamourous">Eng arzon</option>
              </select>
 
-        </div>
+        </div>  
         <div class="search-bar">
           <input type="text" placeholder="Search...">
             <a type="submit">

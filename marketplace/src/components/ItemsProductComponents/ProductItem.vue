@@ -1,8 +1,11 @@
 <template>
   <section class="product-item">
     <div class="product-item__container container">
+      <a class="icon-right" @click="backpage">
+        <img src="@/img/icon/arrow-right.svg" alt="404" width="35" height="35">
+      </a>
       <div class="product-item__img-box">
-        <img :src="product.images[0]" alt="404" class="product-item__img" width="100%" height="600px">
+        <img :src="selectedImage" alt="404" class="product-item__img" width="100%" height="600px">
       </div>
       <div class="product-item__description">
         <div class="product-item__description-title">
@@ -12,17 +15,33 @@
           <p>{{ product.description }}</p>
         </div>
         <div class="product-item__description-imgs">
-          <img :src="product.images[1]" alt="404" width="88px" height="150px">
-          <img :src="product.images[2]" alt="404" width="88px" height="150px">
+          <img
+            class="product-item__img1"
+            :src="product.images[1]"
+            alt="404"
+            width="88px"
+            height="150px">
+          <img
+            class="product-item__img2"
+            :src="product.images[2]"
+            alt="404"
+            width="88px"
+            height="150px">
         </div>
-        <button class="button product-item__btn">
+        <div>
+          <p class="price">{{ product.narxi }}$</p>
+        </div>
+
+        <button class="button product-item__btn"
+        @click="addProducts(product.id)">
               Savatga qo'shish
         </button>
       </div>
-
     </div>
   </section>
 </template>
+
+
 
 
 <script>
@@ -33,8 +52,24 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+    };
+  },
+  methods: {
+    addProducts(id) {
+      this.$store.dispatch('addProducts', id);
+      alert("Mahsulot savatga qo'shildi !");
+    },
+    backpage() {
+      this.$router.push('/shop');
+    },
+  },
 };
 </script>
+
+
+
 
 <style scoped>
 .product-item {
@@ -45,6 +80,21 @@ export default {
   justify-content: space-between;
   gap: 100px;
   color: white;
+}
+.icon-right{
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.icon-right:hover{
+  opacity: 0.6;
+}
+.product-item__img-box{
+  width: 350px;
+  height: 600px;
+
 }
 .product-item__description {
   width: 600px;

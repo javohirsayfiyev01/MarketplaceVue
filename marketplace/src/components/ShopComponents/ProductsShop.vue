@@ -6,10 +6,12 @@
           <li  class="products-shop-catalog-card">
             <RouterLink :to="`/itemsproductView?id=${product.id}`" class="products-shop-catalog-card__img">
               <a href="#">
-                <img :src="product.images[0]" alt="404" width="100%" height="100%">
+                <img :src="product.images[0]" alt="404" width="100%" height="345px">
               </a>
             </RouterLink>
-            <div class="products-shop-catalog-card__info">
+
+            <div class="products-shop-catalog-card__box">
+              <div class="products-shop-catalog-card__info">
                 <h2 class="products-shop-catalog-card__title">{{ product.producttitle }}</h2>
               <div class="products-shop-catalog-card__wrapper">
                 <div class="products-shop-catalog-card__price-info">
@@ -17,11 +19,11 @@
                   <span class="products-shop-catalog-card__ml">{{ product.olcham }}ml</span>
                 </div>
                 <button class="products-shop-catalog-card__btn button"
-                 @click="addProducts">
+                 @click="addProducts(product.id)">
                   Savatga qo'shish
                 </button>
-
               </div>
+            </div>
             </div>
           </li>
         </div>
@@ -47,10 +49,9 @@ export default {
   },
 
   methods: {
-    addProducts(){
-    let ape =  this.$router.push({ name: "basket?id=${product.id}" });
-    this.$store.dispatch('addProducts',ape)
-
+    addProducts(id){
+      this.$store.dispatch('addProducts', id)
+      alert("Mahsulot savatga qo'shildi")
     }
     }
 
@@ -63,7 +64,6 @@ export default {
   width: 260px;
   margin: 0;
   padding: 0;
-  padding-bottom: 8px;
   background: linear-gradient(to right, rgb(170, 170, 170), #a3a3a3);
 }
 .products-shop-catalog-card__img{
@@ -72,18 +72,22 @@ export default {
   margin: 0;
   padding: 0;
 }
+.products-shop-catalog-card__box{
+  width: 260px;
+  height: 100px;
+}
 .products-shop-catalog-card__info{
-  width: 210px;
-  height: 90px;
   margin: 0px 25px 0 25px;
 }
 .products-shop-catalog-card__title{
+  width: 100%;
+  height: 45px;
   font-weight: 500;
   font-size: 20px;
   text-align: center;
 }
 .products-shop-catalog-card__wrapper{
-  margin: 10px 0 0 0;
+  margin: 0;
 }
 .products-shop-catalog-card__price-info{
   display: flex;
@@ -105,7 +109,7 @@ export default {
   height: 30px;
   font-weight: 300;
   font-size: 15px;
-  margin: 15px 0 0 0;
+  margin: 3px 0 0 0;
   padding: 0;
   border-radius: 10px;
 }

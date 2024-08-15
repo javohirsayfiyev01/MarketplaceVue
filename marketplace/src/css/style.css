@@ -27,3 +27,7 @@ body {
 .button:hover{
   opacity: 0.8;
 }
+.price{
+  font-size: 23px;
+  color: rgb(171, 87, 45);;
+}

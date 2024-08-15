@@ -113,6 +113,7 @@
           </div>
         </form>
       </div>
+ 
     </section>
 
 <SiteFooter/>
@@ -184,7 +185,7 @@ methods: {
       };
     this.$store.dispatch('addProduct', newProduct)
 
-
+alert("Mahsulot qo'shildi !")
       this.producttitle = '';
       this.bolim = '';
       this.davlat = '';

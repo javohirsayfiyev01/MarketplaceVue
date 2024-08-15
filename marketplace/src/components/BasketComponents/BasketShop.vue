@@ -7,44 +7,15 @@
             <div class="cart-section__header">
               <h3>Sizning mahsulotlaringiz !</h3>
             </div>
-            <div class="cart-section__body">
-              <ul class="cart-section__list">
-                <li>
-                  <div class="cart-section__item">
-                    <div class="cart-section__item-img">
-                      <img :src="product.images[0]" width="100px" height="100px" alt="404">
-                    </div>
-                    <div class="cart-section__item-content">
-                      <div class="cart-section__item-info">
-                        <h4 class="cart-section__item-name">{{ product.producttitle }}</h4>
-                        <div class="cart-section__item-vendor">
-                          <span>{{ product.olcham }}</span>
-                        </div>
-                      </div>
 
-                      <div class="cart-section__item-count">
-                        <div class="count">
-                        <button>
-                          <img src="@/img/icon/minus-solid.svg" alt="404" width="24" height="24">
-                        </button>
-                         <input class="input" type="number">
-                        <button>
-                          <img src="@/img/icon/plus-solid.svg" alt="404" width="24" height="24">
-                        </button>
-                        </div>
+             <BasketShopItem
+              class="basket-shop__list"
+              v-for="productitem in korzinka"
+              :key="productitem.id"
+              :productitem="productitem"
+              @update-korzinka="handleUpdateKorzinka"
+            />
 
-                      </div>
-
-                      <div class="cart-section__item-price">
-                        <div class="price">
-                          <span class="price__main">{{ product.narxi }}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
           </div>
 
           <div class="basket-form__sidebar cart-section">
@@ -77,7 +48,7 @@
             <div class="cart-form__cart-section cart section">
               <div class="cart-form__sidebar-price">
                 <h3 class="cart-form__sidebar-price__label">Jami:</h3>
-                <h3 class="price">$ 220.00</h3>
+                <h3 class="price">{{  }}$</h3>
               </div>
               <hr>
               <div class="cart-form__detail">
@@ -85,7 +56,7 @@
                   <p>Yetkazib berish tekin !</p>
                 </div> ............................................................
                   <div>
-                  <img src="../img/icon/car-solid.svg" alt="404" width="24" height="24">
+                  <img src="@/img/icon/car-solid.svg" alt="404" width="24" height="24">
                 </div>
               </div>
               <div class="cart-form__bottom">
@@ -94,6 +65,7 @@
 
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -102,19 +74,31 @@
 </template>
 
 <script>
+import BasketShopItem from './BasketShopItem.vue';
 export default {
-  methods: {
-    bos(){
-
+  name: 'BasketShop',
+  components: {
+    BasketShopItem,
+  },
+  data() {
+    return {
+      korzinka: JSON.parse(localStorage.getItem('korzinka')) || []
+    };
+  },
+  computed: {
+    totalPrice() {
+      return this.korzinka.reduce((total, item) => total + item.narxi, 0).toFixed(2);
     }
   },
-  props:{
-    product:{
-      type: Object,
-      requared: true
+  methods: {
+    bos() {
+      alert('Haridingiz uchun rahmat');
+    },
+    handleUpdateKorzinka(updatedKorzinka) {
+      // Mahalliy "korzinka" holatini yangi massiv bilan yangilang
+      this.korzinka = updatedKorzinka;
     }
   }
-
 }
 </script>
 
@@ -166,8 +150,13 @@ export default {
 .input__prefix .icon{
   color: white;
 }
+
+/* Basket Sidebar */
 .basket-form__sidebar{
-  padding: 10px;
+  width: 100%;
+  height: 200px;
+  padding: 15px;
+  background-color: #393838;
 }
 .basket-form{
   display: flex;
@@ -226,56 +215,12 @@ export default {
   position: relative;
   width: 120px;
 }
-.count{
-  background-color: transparent;
-  display: flex;
-  border: 1px solid;
-  border-radius: 10px;
-}
-.count .input{
-  background-color: transparent;
-    border: none;
-    color: #111;
-    display: flex;
-    flex: 1;
-    font-size: 16px;
-    width: 100%;
-    font-weight: 500;
-    height: 36px;
-    line-height: 24px;
-    min-height: 36px;
-    padding: 6px 0;
-    text-align: center;
-}
-.count button{
-    background-position: 50%;
-    border: none;
-    cursor: pointer;
-    font-size: 36px;
-    height: 36px;
-    color: white;
-    background: transparent;
-    width: 36px;
-    margin-bottom: 5px;
-}
-
-.basket-form__sidebar{
-  background-color: #393838;
-
-}
-
-
-/* basket-form__sidebar */
-.basket-form__sidebar{
-  width: 100%;
-  height: 200px;
-  padding: 15px;
-}
 .cart-form__sidebar-price{
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .cart-form__detail{
   display: flex;
   align-items: center;
