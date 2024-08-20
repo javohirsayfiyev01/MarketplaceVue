@@ -52,31 +52,27 @@ export default {
     }
   },
   methods: {
-  deleteItem() {
-    // localStorage dan mavjud "korzinka" massivini oling
-    let korzinka = JSON.parse(localStorage.getItem('korzinka')) || [];
 
-    // Mahsulot identifikatori asosida o'chiriladigan element indeksini toping
+    deleteItem() {
+    let korzinka = JSON.parse(localStorage.getItem('korzinka')) || [];
     let index = korzinka.findIndex(item => item.id === this.productitem.id);
 
-    // Agar element topilsa, uni massivdan olib tashlang
     if (index !== -1) {
       korzinka.splice(index, 1);
-
-      // localStorage-da "korzinka" massivini yangilang
       localStorage.setItem('korzinka', JSON.stringify(korzinka));
 
-      this.$emit('update-korzinka', korzinka);
+      this.$store.commit('updateKorzinka', korzinka);
+
     }
+///  deleteItem funksiyasida, localStorage dan korzinka massivi olinadi va o'chirilishi kerak  bo'lgan     mahsulotning indeksi topiladi.
+/// Agar mahsulot topilsa, u korzinka massividan o'chiriladi va localStorage yangilanadi.
   }
-}
+},
 
 
 }
 </script>
 <style scoped>
-
-
 /* Card */
 .cart-section__body{
   margin-top: 15px;

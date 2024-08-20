@@ -85,19 +85,22 @@ export default {
       korzinka: JSON.parse(localStorage.getItem('korzinka')) || []
     };
   },
-  computed: {
-    totalPrice() {
-      return this.korzinka.reduce((total, item) => total + item.narxi, 0).toFixed(2);
-    }
-  },
+  computed:{
+  korzinka(){
+    return this.$store.getters.getKorzinka;
+///  Buning uchun computed property-dan foydalanib, komponentda korzinka ni Vuex holatidan olishni ta'minlaymiz.
+///  computed property har safar Vuex holati o'zgarganda avtomatik ravishda komponent UI-sini yangilaydi.
+
+  }
+},
   methods: {
     bos() {
-      alert('Haridingiz uchun rahmat');
-    },
-    handleUpdateKorzinka(updatedKorzinka) {
-      // Mahalliy "korzinka" holatini yangi massiv bilan yangilang
-      this.korzinka = updatedKorzinka;
-    }
+    alert('Haridingiz uchun rahmat');
+  },
+  handleUpdateKorzinka(updatedKorzinka) {
+    // Vuex holatini yangilash uchun mutatsiyani bajaring
+    this.$store.commit('updateKorzinka', updatedKorzinka);
+  }
   }
 }
 </script>

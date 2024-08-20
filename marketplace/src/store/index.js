@@ -9,7 +9,7 @@ export default createStore({
   },
 
   mutations: {
-    add_Obj(state, product){
+    add_Obj(state, product)  {
       state.products.push(product),
       localStorage.setItem('products', JSON.stringify(state.products))
     },
@@ -18,6 +18,12 @@ export default createStore({
       let allProducts = state.products
       state.korzinka.push(allProducts.find(product => product.id === id)),
       localStorage.setItem('korzinka', JSON.stringify(state.korzinka))
+    },
+
+
+    updateKorzinka(state, updatedKorzinka) {
+      state.korzinka = updatedKorzinka;
+      localStorage.setItem('korzinka', JSON.stringify(state.korzinka));
     }
   },
 
