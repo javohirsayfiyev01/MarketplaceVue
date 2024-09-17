@@ -5,7 +5,6 @@ export default createStore({
     products: JSON.parse(localStorage.getItem('products')) || [],
 
     korzinka: JSON.parse(localStorage.getItem('korzinka')) || []
-
   },
 
   mutations: {
@@ -14,11 +13,47 @@ export default createStore({
       localStorage.setItem('products', JSON.stringify(state.products))
     },
 
-    id_Obj(state, id){
-      let allProducts = state.products
-      state.korzinka.push(allProducts.find(product => product.id === id)),
-      localStorage.setItem('korzinka', JSON.stringify(state.korzinka))
-    },
+    // id_Obj(state, id) {
+    //   let allProducts = state.products;
+    //   let productExists = state.korzinka.some((product) => product.id === id);
+    //   let foundProduct = allProducts.find((product) => product.id === id);
+
+    //   // Mahsulotni nusxalash
+    //   let clonedProduct = JSON.parse(JSON.stringify(foundProduct));
+
+    //   if (productExists) {
+    //     let foundProductKorzinka = state.korzinka.find(
+    //       (product) => product.id === id
+    //     );
+    //     foundProductKorzinka.count++;
+    //   } else {
+    //     clonedProduct.count = 1;
+    //     state.korzinka.push(clonedProduct);
+    //   }
+    //   localStorage.setItem('korzinka', JSON.stringify(state.korzinka));
+    // },
+
+    // id_Obj(state, id){
+    //   let allProducts = state.products
+    //   let productExists = state.korzinka.some(product => product.id === id);
+    //   let foundProduct = allProducts.find(product => product.id === id);
+    //   if(productExists) {
+    //     let foundProductKorzinka = state.korzinka.find(product => product.id === id);
+    //     // foundProductKorzinka.count++
+    //   } else {
+
+    //     // debugger
+    //     foundProduct.count = 1
+    //     state.korzinka.push(foundProduct)
+    //   }
+    //   localStorage.setItem('korzinka', JSON.stringify(state.korzinka))
+    // },
+
+id_Obj(state, id){
+  let allProducts = state.products
+  state.korzinka.push(allProducts.find(product => product.id === id)),
+  localStorage.setItem('korzinka', JSON.stringify(state.korzinka))
+},
 
 
     updateKorzinka(state, updatedKorzinka) {

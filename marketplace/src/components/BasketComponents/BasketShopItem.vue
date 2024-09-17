@@ -17,11 +17,17 @@
 
                       <div class="cart-section__item-count">
                         <div class="count">
-                          <button>
+                          <button @click="minus(productitem)">
                             <img src="@/img/icon/minus-solid.svg" alt="404" width="24" height="24">
                           </button>
-                          <input class="input" type="number">
-                          <button>
+                          <input class="input"
+                           type="number"
+                           min="1"
+                           readonly
+                           v-model.number="productitem.count"
+
+                           >
+                          <button @click="plus(productitem)">
                             <img src="@/img/icon/plus-solid.svg" alt="404" width="24" height="24">
                           </button>
                         </div>
@@ -29,10 +35,10 @@
 
                       <div class="cart-section__item-price">
                         <div class="price">
-                          <a class="price-delete__btn" @click="deleteItem">
+                          <a class="price-delete__btn" @click="deleteItem(productitem)">
                             <img src="@/img/icon/delete-svg.svg" alt="delete" width="25" height="25">
                           </a>
-                          <span class="price__main">{{productitem.narxi}} $</span>
+                          <span class="price__main">{{productitem.joriyNarxi}} $ </span>
                         </div>
                       </div>
                     </div>
@@ -49,24 +55,61 @@ export default {
     productitem: {
       type: Object,
       required: true
+    },
+  },
+  data() {
+    return {
+      korzinka: JSON.parse(localStorage.getItem('korzinka')) || []
     }
   },
+
+  // mounted() {
+  //   this.counting()
+  // },
+
   methods: {
-
     deleteItem() {
-    let korzinka = JSON.parse(localStorage.getItem('korzinka')) || [];
-    let index = korzinka.findIndex(item => item.id === this.productitem.id);
-
-    if (index !== -1) {
-      korzinka.splice(index, 1);
-      localStorage.setItem('korzinka', JSON.stringify(korzinka));
-
-      this.$store.commit('updateKorzinka', korzinka);
-
-    }
-///  deleteItem funksiyasida, localStorage dan korzinka massivi olinadi va o'chirilishi kerak  bo'lgan     mahsulotning indeksi topiladi.
-/// Agar mahsulot topilsa, u korzinka massividan o'chiriladi va localStorage yangilanadi.
+  let index = this.korzinka.findIndex(item => item.id === this.productitem.id);
+  if (index !== -1) {
+    this.korzinka.splice(index, 1)
+    this.sendParent()
   }
+ },
+
+//  counting(index) {
+//   if(index === undefined) {
+//     this.korzinka.forEach(element => {
+//        element.joriyNarxi = element.tanNarxi * element.count
+//     });
+//   } else {
+//     this.korzinka[index].joriyNarxi = this.korzinka[index].tanNarxi * this.korzinka[index].count
+//   }
+//     this.sendParent()
+//  },
+
+ plus(productitem) {
+  let index = this.korzinka.findIndex(item => item.id === productitem.id);
+  debugger
+  if (index !== -1 && this.korzinka[index].count >= 1) {
+    this.korzinka[index].count++;
+    // this.counting(index)
+    this.sendParent()
+  }
+},
+
+ minus(productitem) {
+  let index = this.korzinka.findIndex(item => item.id === productitem.id);
+  if (index !== -1 && this.korzinka[index].count > 1) {
+    this.korzinka[index].count--;
+    // this.counting(index)
+    this.sendParent()
+  }
+ },
+
+ sendParent() {
+    localStorage.setItem('korzinka', JSON.stringify(this.korzinka));
+    this.$store.commit('updateKorzinka', this.korzinka);
+ },
 },
 
 
@@ -119,6 +162,7 @@ export default {
   color: white;
   margin-top: 55px;
 }
+
 .price{
   width: 100px;
   height: auto;
@@ -154,7 +198,7 @@ export default {
 .count .input{
   background-color: transparent;
     border: none;
-    color: #111;
+    color: white;
     display: flex;
     flex: 1;
     font-size: 16px;

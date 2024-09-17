@@ -79,7 +79,7 @@
               <input type="text" v-model="location" id="city" name="city" placeholder="New York" required>
               <div>
                 <label for="narxi">Narxi</label>
-                <input type="number" v-model="narxi" id="narxi" name="narxi" placeholder="Narxi" required>
+                <input type="number" v-model="tanNarxi" id="narxi" name="narxi" placeholder="Narxi" required>
               </div>
               <div>
                 <label for="olcham">O'lchami</label>
@@ -113,7 +113,7 @@
           </div>
         </form>
       </div>
- 
+
     </section>
 
 <SiteFooter/>
@@ -134,7 +134,8 @@ data() {
       davlat:'',
       description: '',
       location: '',
-      narxi: '',
+      tanNarxi: '',
+      joriyNarxi: null,
       olcham: '',
       namee: '',
       emaill: '',
@@ -175,7 +176,8 @@ methods: {
         davlat: this.davlat,
         description: this.description,
         location: this.location,
-        narxi: this.narxi,
+        tanNarxi: this.tanNarxi,
+        joriyNarxi: this.joriyNarxi,
         olcham: this.olcham,
         namee: this.namee,
         emaill: this.emaill,
@@ -191,7 +193,8 @@ alert("Mahsulot qo'shildi !")
       this.davlat = '';
       this.description = '';
       this.location = '';
-      this.narxi = '';
+      this.tanNarxi = '';
+      this.joriyNarxi = null;
       this.olcham = '';
       this.namee = '';
       this.emaill = '';

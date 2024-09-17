@@ -15,7 +15,7 @@
                 <h2 class="products-shop-catalog-card__title">{{ product.producttitle }}</h2>
               <div class="products-shop-catalog-card__wrapper">
                 <div class="products-shop-catalog-card__price-info">
-                  <p class="products-shop-catalog-card__price">{{ product.narxi }}$</p>
+                  <p class="products-shop-catalog-card__price">{{ product.tanNarxi }}$</p>
                   <span class="products-shop-catalog-card__ml">{{ product.olcham }}ml</span>
                 </div>
                 <button class="products-shop-catalog-card__btn button"
@@ -53,7 +53,7 @@ export default {
       this.$store.dispatch('addProducts', id)
       alert("Mahsulot savatga qo'shildi")
     }
-    }
+  }
 
 
 }
