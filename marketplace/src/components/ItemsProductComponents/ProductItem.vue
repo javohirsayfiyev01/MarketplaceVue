@@ -28,8 +28,9 @@
             width="88px"
             height="150px">
         </div>
+        
         <div>
-          <p class="price">{{ product.narxi }}$</p>
+          <p class="price">{{ product.tanNarxi }}$</p>
         </div>
 
         <button class="button product-item__btn"

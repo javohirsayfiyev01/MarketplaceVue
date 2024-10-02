@@ -14,7 +14,6 @@
                           <span>{{ productitem.olcham }}ml</span>
                         </div>
                       </div>
-
                       <div class="cart-section__item-count">
                         <div class="count">
                           <button @click="minus(productitem)">
@@ -24,9 +23,7 @@
                            type="number"
                            min="1"
                            readonly
-                           v-model.number="productitem.count"
-
-                           >
+                           v-model.number="productitem.count">
                           <button @click="plus(productitem)">
                             <img src="@/img/icon/plus-solid.svg" alt="404" width="24" height="24">
                           </button>
@@ -56,61 +53,78 @@ export default {
       type: Object,
       required: true
     },
-  },
-  data() {
-    return {
-      korzinka: JSON.parse(localStorage.getItem('korzinka')) || []
-    }
-  },
+},
 
-  // mounted() {
-  //   this.counting()
-  // },
+  mounted() {
+    this.counting()
+  },
 
   methods: {
     deleteItem() {
-  let index = this.korzinka.findIndex(item => item.id === this.productitem.id);
+/// 1. Mahsulotning `korzinka`dagi indeksini topish
+   let index = this.korzinka.findIndex(item => item.id === this.productitem.id);
+/// 2. Agar indeks topilsa (ya'ni, mahsulot `korzinka`da mavjud bo'lsa)
   if (index !== -1) {
+/// 3. Mahsulotni `korzinka` massividan olib tashlash
     this.korzinka.splice(index, 1)
+  /// 4. Ota komponentga `sendParent` orqali xabar yuborish
     this.sendParent()
   }
  },
 
-//  counting(index) {
-//   if(index === undefined) {
-//     this.korzinka.forEach(element => {
-//        element.joriyNarxi = element.tanNarxi * element.count
-//     });
-//   } else {
-//     this.korzinka[index].joriyNarxi = this.korzinka[index].tanNarxi * this.korzinka[index].count
-//   }
-//     this.sendParent()
-//  },
+ counting(index) {
+  if(index === undefined) {
+/// Barcha mahsulotlar bo'yicha aylanib chiqiladi va har birining miqdori asosida narx yangilanadi.
+    this.korzinka.forEach(element => {
+       element.joriyNarxi = element.tanNarxi * element.count /// tanNarxi * count = joriyNarxi
+    });
+  } else {
+/// Agar indeks berilgan bo'lsa, faqat o'sha mahsulotning narxi yangilanadi.
+    this.korzinka[index].joriyNarxi = this.korzinka[index].tanNarxi * this.korzinka[index].count
+  }
+/// Savatcha o'zgarganini ota komponentga xabar qilish uchun sendParent() funksiyasi chaqiriladi.
+    this.sendParent()
+ },
 
  plus(productitem) {
-  let index = this.korzinka.findIndex(item => item.id === productitem.id);
-  debugger
+/// Savatchadagi mahsulotning indeksini topish (id orqali).
+   let index = this.korzinka.findIndex(item => item.id === productitem.id);
+// Agar mahsulot mavjud bo'lsa va uning miqdori 1 yoki undan katta bo'lsa, miqdorini oshirish.
   if (index !== -1 && this.korzinka[index].count >= 1) {
-    this.korzinka[index].count++;
-    // this.counting(index)
-    this.sendParent()
+    this.korzinka[index].count = this.korzinka[index].count + 1; /// Miqdorni oshirish.
+    console.log('');
+
+    this.counting(index)  /// Yangi miqdor asosida narxni qayta hisoblash.
+    this.sendParent() /// Ota komponentga yangilangan savatchani xabar qilish.
   }
 },
 
  minus(productitem) {
+/// Savatchadagi mahsulotning indeksini topish
   let index = this.korzinka.findIndex(item => item.id === productitem.id);
+/// Agar mahsulot mavjud bo'lsa va uning miqdori 1 dan katta bo'lsa
   if (index !== -1 && this.korzinka[index].count > 1) {
     this.korzinka[index].count--;
-    // this.counting(index)
+// Yangi miqdor bilan mahsulotning narxini qayta hisoblaymiz
+    this.counting(index)
+/// Ota komponentga yangilangan savatcha haqida xabar beramiz
     this.sendParent()
   }
  },
 
  sendParent() {
+/// Savatchani localStorage'da yangilash
     localStorage.setItem('korzinka', JSON.stringify(this.korzinka));
+// Vuex'dagi savatcha holatini yangilash
     this.$store.commit('updateKorzinka', this.korzinka);
  },
 },
+computed: {
+/// Savatchadagi mahsulotlar `korzinka` computed funksiyasi orqali olinadi
+  korzinka() {
+    return this.$store.getters.getKorzinka;
+  }
+}
 
 
 }

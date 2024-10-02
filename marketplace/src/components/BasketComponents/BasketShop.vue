@@ -13,9 +13,7 @@
               v-for="productitem in korzinka"
               :key="productitem.id"
               :productitem="productitem"
-              @update-korzinka="handleUpdateKorzinka"
             />
-
           </div>
 
           <div class="basket-form__sidebar cart-section">
@@ -48,7 +46,7 @@
             <div class="cart-form__cart-section cart section">
               <div class="cart-form__sidebar-price">
                 <h3 class="cart-form__sidebar-price__label">Jami:</h3>
-                <h3 class="price">{{  }}$</h3>
+                <h3 class="price global_price">{{  }}$</h3>
               </div>
               <hr>
               <div class="cart-form__detail">
@@ -77,28 +75,26 @@
 import BasketShopItem from './BasketShopItem.vue';
 export default {
   name: 'BasketShop',
+
   components: {
     BasketShopItem,
   },
-  data() {
-    return {
-      korzinka: JSON.parse(localStorage.getItem('korzinka')) || []
-    };
-  },
-  computed:{
-  korzinka(){
-    return this.$store.getters.getKorzinka;
-///  Buning uchun computed property-dan foydalanib, komponentda korzinka ni Vuex holatidan olishni ta'minlaymiz.
-///  computed property har safar Vuex holati o'zgarganda avtomatik ravishda komponent UI-sini yangilaydi.
 
+  computed:{
+/// `korzinka` funksiyasi storedan savatchadagi mahsulotlarni oladi.
+  korzinka(){
+    return this.$store.getters.getKorzinka || [];
   }
 },
+
   methods: {
     bos() {
     alert('Haridingiz uchun rahmat');
   },
+
+
+/// `handleUpdateKorzinka` savatcha yangilanganda korzinkani do‘konda yangilash uchun ishlatiladi.
   handleUpdateKorzinka(updatedKorzinka) {
-    // Vuex holatini yangilash uchun mutatsiyani bajaring
     this.$store.commit('updateKorzinka', updatedKorzinka);
   }
   }
